@@ -152,7 +152,7 @@ A Pod Group account has been created for further testing on the [Connio demo clo
 
 You should have received an activation token by now to login. Please complete your registeration to conduct further tests.
 
-ICCID `049305930495403` has already been created and associated with your account (_acc_)
+ICCID `049305930495403` has already been created and associated with your account (\_acc_1254624011134164394)
 
 Please let Baris or Emre know if you need quick walkthrough on the platform to easy navigatation.
 
