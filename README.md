@@ -58,13 +58,15 @@ Once the ICCID is associated with a PSK and account, the SIM is ready to communi
 ### Creating new device 
 
 ```
-POST https://api.connio.cloud:11111/v1/dev/{DEVICE_ID}?iccid={ICCID}
+POST /v1/dev/{DEVICE_ID}?iccid={ICCID}
 
 ```
 
 This request doesn't carry any payload.
 
-### Creating new device by specifying an existing device profile
+New device is generated from the default device profile which is "ConnectedDevice".
+
+### Creating new device by specifying an user device profile
 
 The Connio platform support device templating called **Device Profile**. `Create new device` request can be used by adding a `profile` parameter such as:
 
@@ -72,7 +74,7 @@ The Connio platform support device templating called **Device Profile**. `Create
 POST /v1/dev/{DEVICE_ID}?iccid={ICCID}&profile={PROFILE_NAME}
 ```
 
-In such case, the response would be same as the current one but the device would be generated using the given template behind the sceen.
+In such case, the response will be exactly same but the device will be generated using the given device profile behind the sceen. This feature is useful for grouping devices based on their capabilities and domain.
 
 ```
 {
@@ -81,7 +83,6 @@ In such case, the response would be same as the current one but the device would
 "pwd": {MQTT_CLIENT_PASSWORD}
 }
 ```
-
 
 **By default, TLS13-AES128-CCM-SHA256 and TLS13-AES128-GCM-SHA256 cipher suites are supported.**
 
