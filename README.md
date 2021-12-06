@@ -64,6 +64,23 @@ POST https://api.connio.cloud:11111/v1/dev/{DEVICE_ID}?iccid={ICCID}
 
 This request doesn't carry any payload.
 
+### Creating new device by specifying an existing device profile
+
+The Connio platform support device templating called **Device Profile**. `Create new device` request can be used by adding a `profile` parameter such as:
+
+```
+POST /v1/dev/{DEVICE_ID}?iccid={ICCID}&profile={PROFILE_NAME}
+```
+
+In such case, the response would be same as the current one but the device would be generated using the given template behind the sceen.
+
+```
+{
+"cli": {CLIENT_ID}, 
+"usr": {MQTT_CLIENT_USERNAME},
+"pwd": {MQTT_CLIENT_PASSWORD}
+}
+```
 
 
 **By default, TLS13-AES128-CCM-SHA256 and TLS13-AES128-GCM-SHA256 cipher suites are supported.**
@@ -98,6 +115,26 @@ Following response should be expected if everything goes fine.
 "pwd": {MQTT_CLIENT_PASSWORD}
 }
 ```
+
+### Getting device MQTT credentials with the given configuration property
+
+Configuration property can be any property created by the user. For the following call you should just provide the name of your configuration property. This property might have any data type.
+
+```
+GET /v1/dev/{DEVICE_ID}?iccid={ICCID}&config={CONFIG_PROPERTY_NAME}
+```
+
+In such case, the response would be:
+
+```
+{
+"cli": {CLIENT_ID}, 
+"usr": {MQTT_CLIENT_USERNAME},
+"pwd": {MQTT_CLIENT_PASSWORD},
+"cfg": { ... }
+}
+```
+
 
 ## SIM Simulator Excerpts
 
@@ -162,38 +199,6 @@ Please let Baris or Emre know if you need quick walkthrough on the platform to e
 
 - There is a 250 bytes limit for each message between the SIM and the platform. If the generated response is larger than 250 bytes, the platform doesn't send any response and records the incident as a WARNING in the log.
 
-- This feature should be considered as Alpha. Request and Response validations are not complete.
+- This feature should be considered as Beta. Request and Response validations are not complete.
 
-- [IMPROVEMENT] `Create new device` request can be improved by adding a `config` parameter such as:
-
-```
-GET /v1/dev/{DEVICE_ID}?iccid={ICCID}&config={CONFIG_PROPERTY_NAME}
-```
-
-In such case, the response would be:
-
-```
-{
-"cli": {CLIENT_ID}, 
-"usr": {MQTT_CLIENT_USERNAME},
-"pwd": {MQTT_CLIENT_PASSWORD},
-"config": { ... }
-}
-```
-
-- [IMPROVEMENT] The Connio platform support device templating called **Device Profile**. `Create new device` request can be improved by adding a `profile` parameter such as:
-
-```
-GET /v1/dev/{DEVICE_ID}?iccid={ICCID}&profile={PROFILE_NAME_OR_ID}
-```
-
-In such case, the response would be same as the current one but the device would be generated using the given template behind the sceen.
-
-```
-{
-"cli": {CLIENT_ID}, 
-"usr": {MQTT_CLIENT_USERNAME},
-"pwd": {MQTT_CLIENT_PASSWORD}
-}
-```
 
