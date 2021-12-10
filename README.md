@@ -82,26 +82,25 @@ New device is generated from the default device profile which is "ConnectedDevic
 
 ### Creating new device by specifying an user device profile
 
-The Connio platform support device templating called **Device Profile**. `Create new device` request can be used by adding a `profile` parameter such as:
+The Connio platform supports device templating called **Device Profile**. `Create new device` request can be used by adding a `profile` parameter such as:
 
 ```
 POST /v1/dev/{DEVICE_ID}?iccid={ICCID}&profile={PROFILE_NAME}
 ```
 
-In such case, the response will be exactly same but the device will be generated using the given device profile behind the sceen. This feature is useful for grouping devices based on their capabilities and domain.
+In such case, the response will be exactly same and the device will be generated using the given device profile. This feature is useful for grouping devices based on their capabilities and domain.
 
 This request doesn't carry any payload.
 
 ### Creating new device by specifying an user device profile, an app and a method belongs to the given app
 
-This request creates a device from the given device profile, associates it with the given app, then calls the app's method. This is useful to initialize devices
-which are associated with certain apps.
+The Connio platform supports the app concept that allows to associate devices with IoT solutions. The following call creates a device from the given device profile, associates it with the given app, then calls the app's method for initialization.
 
 ```
 POST /v1/dev/{DEVICE_ID}?iccid={ICCID}&profile={PROFILE_NAME}&app={APP_ID}&init={APP_METHOD_ID}
 ```
 
-In such case, the response will be exactly same but the device will be generated using the given device profile behind the sceen. This feature is useful for grouping devices based on their capabilities and domain.
+The response will be the same as above. This feature is useful for grouping devices by profile and apps, and initialize their properties automatically. 
 
 This request doesn't carry any payload.
 
