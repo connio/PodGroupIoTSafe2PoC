@@ -64,28 +64,6 @@ POST /v1/dev/{DEVICE_ID}?iccid={ICCID}
 
 This request doesn't carry any payload.
 
-New device is generated from the default device profile which is "ConnectedDevice".
-
-### Creating new device by specifying an user device profile
-
-The Connio platform support device templating called **Device Profile**. `Create new device` request can be used by adding a `profile` parameter such as:
-
-```
-POST /v1/dev/{DEVICE_ID}?iccid={ICCID}&profile={PROFILE_NAME}
-```
-
-In such case, the response will be exactly same but the device will be generated using the given device profile behind the sceen. This feature is useful for grouping devices based on their capabilities and domain.
-
-```
-{
-"cli": {CLIENT_ID}, 
-"usr": {MQTT_CLIENT_USERNAME},
-"pwd": {MQTT_CLIENT_PASSWORD}
-}
-```
-
-**By default, TLS13-AES128-CCM-SHA256 and TLS13-AES128-GCM-SHA256 cipher suites are supported.**
-
 Following response should be expected if everything goes fine.
 
 ```
@@ -98,6 +76,34 @@ Following response should be expected if everything goes fine.
 
 In case of an error, SIM should get an error with HTTP 404 status code. We can improve error types in the future.
 
+New device is generated from the default device profile which is "ConnectedDevice".
+
+**By default, TLS13-AES128-CCM-SHA256 and TLS13-AES128-GCM-SHA256 cipher suites are supported.**
+
+### Creating new device by specifying an user device profile
+
+The Connio platform support device templating called **Device Profile**. `Create new device` request can be used by adding a `profile` parameter such as:
+
+```
+POST /v1/dev/{DEVICE_ID}?iccid={ICCID}&profile={PROFILE_NAME}
+```
+
+In such case, the response will be exactly same but the device will be generated using the given device profile behind the sceen. This feature is useful for grouping devices based on their capabilities and domain.
+
+This request doesn't carry any payload.
+
+### Creating new device by specifying an user device profile, an app and a method belongs to the given app
+
+This request creates a device from the given device profile, associates it with the given app, then calls the app's method. This is useful to initialize devices
+which are associated with certain apps.
+
+```
+POST /v1/dev/{DEVICE_ID}?iccid={ICCID}&profile={PROFILE_NAME}&app={APP_ID}&init={APP_METHOD_ID}
+```
+
+In such case, the response will be exactly same but the device will be generated using the given device profile behind the sceen. This feature is useful for grouping devices based on their capabilities and domain.
+
+This request doesn't carry any payload.
 
 ### Getting device MQTT credentials
 
